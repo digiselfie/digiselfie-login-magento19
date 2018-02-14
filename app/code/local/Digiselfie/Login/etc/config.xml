@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+/**
+ * Digiselfie Login 	etc/config.xml
+ *
+ * @category    Digiselfie
+ * @package     Digiselfie_Login
+ * @author      Digiselfie Inc.
+ */
+-->
+
+<config>
+    <modules>
+        <Digiselfie_Login>
+            <version>0.0.4</version>
+			<release_version>0.0.4</release_version>
+			<parent_product_name>Digiselfie Login</parent_product_name>
+			<author>Digiselfie Inc.</author>
+        </Digiselfie_Login>
+    </modules>
+
+    <default>
+        <digiselfie>
+            <digiselfie_login>
+                <enabled>0</enabled>
+            </digiselfie_login>
+        </digiselfie>
+    </default>
+
+    <frontend>
+        <translate>
+            <modules>
+                <Digiselfie_Login>
+                     <files>
+                        <default>Digiselfie_Login.csv</default>
+                     </files>
+                </Digiselfie_Login>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <Digiselfie_Login>
+                    <file>digiselfie/login/login.xml</file>
+                </Digiselfie_Login>
+
+            </updates>
+        </layout>
+    </frontend>
+
+    <global>
+        <models>
+            <digiselfie_login>
+                <class>Digiselfie_Login_Model</class>
+            </digiselfie_login>
+        </models>
+
+        <blocks>
+            <digiselfie_login>
+                <class>Digiselfie_Login_Block</class>
+            </digiselfie_login>
+            <adminhtml>
+                <rewrite>
+                    <permissions_user_edit_tab_main>Digiselfie_Login_Block_Adminhtml_Permissions_User_Edit_Tab_Main</permissions_user_edit_tab_main>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+
+        <helpers>
+            <digiselfie_login>
+                <class>Digiselfie_Login_Helper</class>
+            </digiselfie_login>
+        </helpers>
+
+        <resources>
+            <digiselfie_login_setup>
+                <setup>
+                    <module>Digiselfie_Login</module>
+                    <class>Digiselfie_Login_Model_Mysql4_Setup</class>
+                </setup>
+            </digiselfie_login_setup>
+        </resources>
+    </global>
+
+    <frontend>
+        <routers>
+            <digiselfie_login>
+                <use>standard</use>
+                <args>
+                    <module>Digiselfie_Login</module>
+                    <frontName>digiselfie</frontName>
+                </args>
+            </digiselfie_login>
+        </routers>
+    </frontend>
+    <admin>
+        <routers>
+            <digiselfie_login>
+                <use>admin</use>
+                <args>
+                    <module>Digiselfie_Login</module>
+                    <frontName>digiselfie</frontName>
+                </args>
+            </digiselfie_login>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <digiselfie_login>
+                     <file>digiselfie/login/login.xml</file>
+                </digiselfie_login>
+            </updates>
+        </layout>
+
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <digiselfie>
+                                            <title>Digiselfie Login</title>
+                                        </digiselfie>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+</config>
+

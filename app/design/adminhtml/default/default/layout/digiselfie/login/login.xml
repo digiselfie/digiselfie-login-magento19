@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<layout>
+  <default>
+    <reference name="head">
+      <action method="addItem">
+          <type>skin_css</type>
+          <name>digiselfie_login/css/styles.css</name>
+      </action>
+    </reference>
+  </default>
+  <adminhtml_index_login>
+    <reference name="form.additional.info">
+      <block type="digiselfie_login/login" name="digiselfie_login_login" template="digiselfie/login/login.phtml">
+        <block type="digiselfie_login/digiselfie_button" name="digiselfie_login_button" template="digiselfie/login/digiselfie/button.phtml"/>
+      </block>
+    </reference>
+  </adminhtml_index_login>
+</layout>

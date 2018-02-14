@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+/**
+ * DigiselfieLogin  layout/digiselfie/digiselfie_login.xml
+ *
+ * @category    Digiselfie
+ * @package     Digiselfie_Login
+ * @author    Digiselfie Inc.
+ */
+-->
+
+<layout>
+    <customer_account_login>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>digiselfie_login/css/styles.css</name>
+            </action>
+        </reference>
+
+        <reference name="customer_form_login">
+            <action method="setTemplate"><template>digiselfie/login/customer/form/login.phtml</template></action>
+            <block type="persistent/form_remember" name="persistent.remember.me" template="persistent/remember_me.phtml" />
+            <block type="core/template" name="persistent.remember.me.tooltip" template="persistent/remember_me_tooltip.phtml" />
+            <block type="digiselfie_login/login" name="digiselfie_login_login" template="digiselfie/login/login.phtml">
+                <block type="digiselfie_login/digiselfie_button" name="digiselfie_login_button" template="digiselfie/login/digiselfie/button.phtml"/>
+            </block>
+        </reference>
+    </customer_account_login>
+
+    <customer_account_create>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>digiselfie_login/css/styles.css</name>
+            </action>
+        </reference>
+        <reference name="customer_form_register">
+            <action method="setTemplate" >
+                <template>digiselfie/login/customer/form/register.phtml</template>
+            </action>
+            <block type="digiselfie_login/register" name="digiselfie_login_register">
+                <block type="digiselfie_login/digiselfie_button" name="digiselfie_login_checkout_button" />
+            </block>
+        </reference>
+    </customer_account_create>
+
+    <!--<customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="digiselfie_login"
+                ifconfig="digiselfie/digiselfie_login/enabled">
+                <name>digiselfie_login</name>
+                <path>digiselfielogin/account/digiselfie</path>
+                <label>Digiselfie Login</label>
+            </action>
+        </reference>
+    </customer_account>-->
+
+    <!--<digiselfie_login_account_digiselfie translate="label"  module="digiselfie_login">
+        <label>Customer My Account Digiselfie Login</label>
+        <update handle="customer_account"/>
+        <reference name="head">
+            <action method="setTitle" translate="title" module="digiselfie_login">
+                <title>Digiselfie Login</title>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>digiselfie_login/css/styles.css</name>
+            </action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="login/digiselfie_account" name="digiselfie_login_account">
+                <block type="login/digiselfie_button" name="digiselfie_login_account_button" />
+            </block>
+        </reference>
+        <reference name="customer_account_navigation">
+            <action method="setActive" module="digiselfie_login">
+                <path>digiselfielogin/account/digiselfie</path>
+            </action>
+        </reference>
+    </digiselfie_login_account_digiselfie>-->
+
+    <checkout_onepage_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>digiselfie_login/css/styles.css</name>
+            </action>
+        </reference>
+        <reference name="checkout.onepage.login">
+            <action method="setTemplate" >
+                <template>digiselfie/login/checkout/onepage/login.phtml</template>
+            </action>
+            <block type="digiselfie_login/checkout" name="digiselfie_login_checkout">
+                <block type="digiselfie_login/digiselfie_button" name="digiselfie_checkout_button" template="digiselfie/login/digiselfie/button.phtml"/>
+            </block>
+        </reference>
+    </checkout_onepage_index>
+
+</layout>

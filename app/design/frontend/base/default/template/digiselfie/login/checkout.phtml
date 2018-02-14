@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @category    Digiselfie
+ * @package     Digiselfie_Login
+ * @author      Digiselfie Inc.
+ */
+
+?>
+<div class="digiselfie-login-checkout">
+    <div class="<?php echo $this->_getColSet(); ?>">
+    <h3>Login</h3>
+        <?php if($this->_digiselfieEnabled()): ?>
+        <div class="<?php echo $this->_getCol(); ?>">
+            <?php echo $this->getChildHtml('digiselfie_checkout_button')?>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>
