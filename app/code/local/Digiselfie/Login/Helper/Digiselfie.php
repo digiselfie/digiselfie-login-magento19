@@ -101,6 +101,7 @@ class Digiselfie_Login_Helper_Digiselfie extends Mage_Core_Helper_Abstract
 
         $collection = $customer->getCollection()
                 ->addFieldToFilter('email', $email)
+                ->addAttributeToSelect('digiselfie_login_id')
                 ->setPageSize(1);
 
         if($customer->getSharingConfig()->isWebsiteScope()) {

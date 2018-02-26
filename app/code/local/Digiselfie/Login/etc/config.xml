@@ -13,8 +13,8 @@
 <config>
     <modules>
         <Digiselfie_Login>
-            <version>0.0.4</version>
-			<release_version>0.0.4</release_version>
+            <version>0.0.5</version>
+			<release_version>0.0.5</release_version>
 			<parent_product_name>Digiselfie Login</parent_product_name>
 			<author>Digiselfie Inc.</author>
         </Digiselfie_Login>
@@ -92,6 +92,17 @@
                 </args>
             </digiselfie_login>
         </routers>
+        <events>
+            <customer_login>
+                <observers>
+                    <digiselfie_login_customer_login>
+                        <type>model</type>
+                        <class>digiselfie_login/observer</class>
+                        <method>customerLogin</method>
+                    </digiselfie_login_customer_login>
+                </observers>
+            </customer_login>
+        </events>
     </frontend>
     <admin>
         <routers>

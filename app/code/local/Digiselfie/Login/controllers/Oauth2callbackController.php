@@ -170,12 +170,44 @@ protected $referer = null;
                 return;
             }
 
+            $email = $userInfo->ID . '@' . 'digiselfie.com';
+            if(!empty($userInfo->Emails[0]->Address)) {
+                $email = $userInfo->Emails[0]->Address;
+            }
+
             $customersByEmail = Mage::helper('digiselfie_login/digiselfie')
-                ->getCustomersByEmail($userInfo->Emails[0]->Address);
+                ->getCustomersByEmail($email);
 
             if($customersByEmail->count())  {
                 // Email account already exists - attach, login
                 $customer = $customersByEmail->getFirstItem();
+                $customerDigiselfieId = $customer->getDigiselfieLoginId();
+
+                if (empty($customerDigiselfieId)) {
+                    $this->referer = Mage::getBaseUrl() . 'customer/account/login';
+                    //force to delete DigiSelfie cookie variables before install
+                    unset($_COOKIE['digiselfie_login_id']);
+                    unset($_COOKIE['ds_customer_id']);
+
+                    //Cookie lifetime 5 min
+                    Mage::getModel('core/cookie')->set('digiselfie_login_id', $userInfo->ID, 60*5);
+                    Mage::getModel('core/cookie')->set('ds_customer_id', $customer->getId(), 60*5);
+
+                    Mage::getSingleton('core/session')
+                        ->addNotice(
+                            $this->__('We found you already have an account in our system. Please enter your username and password to link your account with your digiselfie.')
+                        );
+                    
+                    return;
+                }
+
+                if (!empty($customerDigiselfieId) && $customerDigiselfieId != $userInfo->ID) {
+                    Mage::getSingleton('core/session')->addError(
+                        __('We found your account, but you need to login with your other digiselfie.')
+                    );
+
+                    return;
+                }
 
                 Mage::helper('digiselfie_login/digiselfie')->connectByDigiselfieId(
                     $customer,
@@ -194,23 +226,6 @@ protected $referer = null;
                     $this->__('Sorry, could not retrieve your Digiselfie first name. Please try again.')
                 );
             }
-
-            /* NOT REQUIRED in DigiSelfie
-             * if(empty($userInfo->LastName)) {
-                throw new Exception(
-                    $this->__('Sorry, could not retrieve your Digiselfie last name. Please try again.')
-                );
-            }*/
-
-            $email = $userInfo->ID . '@' . 'digiselfie.com';
-            if(!empty($userInfo->Emails[0]->Address)) {
-                $email = $userInfo->Emails[0]->Address;
-
-                /*throw new Exception(
-                    $this->__('Sorry, could not retrieve your Digiselfie email. Please try again.')
-                );*/
-            }
-
 
             Mage::helper('digiselfie_login/digiselfie')->connectByCreatingAccount(
                 $email,
