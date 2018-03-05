@@ -27,6 +27,7 @@ class Digiselfie_Login_Helper_Digiselfie extends Mage_Core_Helper_Abstract
             $digiselfieId
         )
     {
+        /** @var Mage_Customer_Model_Customer $customer */
         $customer = Mage::getModel('customer/customer');
 
         $customer->setWebsiteId(Mage::app()->getWebsite()->getId())
@@ -39,7 +40,7 @@ class Digiselfie_Login_Helper_Digiselfie extends Mage_Core_Helper_Abstract
 
         $customer->setConfirmation(null);
         $customer->save();
-        $customer->sendNewAccountEmail('confirmed', '', Mage::app()->getStore()->getId());
+        $customer->sendNewAccountEmail('registered', '', Mage::app()->getStore()->getId());
         Mage::getSingleton('customer/session')->setCustomerAsLoggedIn($customer);
     }
 
